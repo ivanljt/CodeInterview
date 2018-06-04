@@ -1,4 +1,7 @@
 /build
-/.idea
+/.idea/*
 .idea/workspace.xml
 /out
+*.iml
+/local.properties
+/captures
