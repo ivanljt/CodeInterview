@@ -38,7 +38,7 @@ class PathInMatrix {
             return true;
         }
         boolean hasPath = false;
-        int curMatrixIndex = row * cols + col;//矩阵下标与 当前匹配到的字符串中的下标不同。这里容易搞错
+        int curMatrixIndex = row * cols + col;//矩阵下标与 当前匹配到的字符串中的下标不同。不要弄混了，curCharIndex 仅用于在待匹配的字符数组定位当前正在匹配的字符
         if (row >= 0 && row < rows &&
                 col < cols && col >= 0 &&
                 matrix[curMatrixIndex] == str[curCharIndex] &&//当前字符匹配
