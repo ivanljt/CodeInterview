@@ -4,8 +4,13 @@ class Preorder {
     /**
      * 递归遍历
      */
-    void preorderRecursive() {
-
+    void preorderRecursive(TreeNode pRoot) {
+        if (pRoot == null){
+            return;
+        }
+        System.out.println(pRoot.val);
+        preorderRecursive(pRoot.left);
+        preorderRecursive(pRoot.right);
     }
 
     /**
