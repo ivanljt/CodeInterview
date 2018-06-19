@@ -2,6 +2,8 @@ package t树的遍历;
 
 import java.util.Stack;
 
+import base.TreeNode;
+
 class Postorder {
     /**
      * 递归遍历方式

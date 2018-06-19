@@ -2,6 +2,8 @@ package t树的遍历;
 
 import java.util.Stack;
 
+import base.TreeNode;
+
 /**
  * 先打印根节点，再打印左子树，最后打印右子树
  */

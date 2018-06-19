@@ -1,23 +1,7 @@
 package t37二叉树的序列化;
 
-class TreeNode {
-    int val = 0;
-    TreeNode left = null;
-    TreeNode right = null;
 
-    public TreeNode(int val) {
-        this.val = val;
-    }
-
-    @Override
-    public String toString() {
-        return "TreeNode{" +
-                "val=" + val +
-                ", left=" + left +
-                ", right=" + right +
-                '}';
-    }
-}
+import base.TreeNode;
 
 /**
  * 题目：请实现两个函数，分别用来序列化和反序列化二叉树
