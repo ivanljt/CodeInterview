@@ -2,17 +2,7 @@ package t54二叉树的第k个节点;
 
 import java.util.Stack;
 
-class TreeNode {
-    int val;
-    TreeNode left = null;
-    TreeNode right = null;
-
-    public TreeNode(int val) {
-        this.val = val;
-
-    }
-
-}
+import base.TreeNode;
 
 public class KNode {
 
