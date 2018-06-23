@@ -1,5 +1,6 @@
 /build
 /.idea/*
+.idea/modules.xml
 .idea/workspace.xml
 /out
 *.iml
