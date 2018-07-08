@@ -8,10 +8,14 @@ import java.util.Random;
 class DataFactory {
 
     static int[] getRandomAry(int len) {
-        Random random = new Random();
+        return getRandomAry(len, len);
+    }
+
+    static int[] getRandomAry(int len, int range) {
+        Random random = new Random(System.currentTimeMillis());
         int[] ary = new int[len];
         for (int i = 0; i < len; i++) {
-            ary[i] = random.nextInt(len);
+            ary[i] = random.nextInt(range);
         }
         return ary;
     }
