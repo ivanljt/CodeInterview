@@ -29,12 +29,43 @@ class BinarySearch {
         return -1;
     }
 
+    /**
+     * 递归实现
+     */
+    public int binary(int[] ary, int start, int end, int target) {
+        if (start > end) {
+            return -1;
+        }
+        int mid = start + (end - start) / 2;
+        if (ary[mid] == target) {
+            return mid;
+        } else if (ary[mid] > target) {
+            return binary(ary, mid + 1, end, target);
+        } else {
+            return binary(ary, start, mid - 1, target);
+        }
+    }
+
     public static void main(String[] args) {
         int[] ary = DataFactory.getRandomAry(15, 16);
         Arrays.sort(ary);
         BinarySearch binarySearch = new BinarySearch();
-        int index = binarySearch.binary(ary, 10);
+        int index = binarySearch.binary(ary, 0, ary.length - 1, 10);
         System.out.println(Arrays.toString(ary));
         System.out.println("target number index " + index);
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
