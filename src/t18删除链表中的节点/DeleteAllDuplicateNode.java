@@ -1,13 +1,6 @@
 package t18删除链表中的节点;
 
-class ListNode {
-    int val;
-    ListNode next = null;
-
-    ListNode(int val) {
-        this.val = val;
-    }
-}
+import base.ListNode;
 
 /**
  *
@@ -24,7 +17,7 @@ public class DeleteAllDuplicateNode {
 
         if (p.val == p.next.val) {//重复值
             int v = p.val;
-            //先抛弃第一个重复值
+            //先抛弃第一个重复值,这行代码也可以省略
             p = p.next;
             while (p != null && p.val == v) {//只要值重复，就一直往后
                 p = p.next;
@@ -37,5 +30,9 @@ public class DeleteAllDuplicateNode {
             return pHead;
         }
     }
+
+    /**
+     * 迭代解法。详见 leetcode.linkedlist.RemoveDuplicateNodeII#deleteDuplicationIter(ListNode)
+     * */
 }
 
