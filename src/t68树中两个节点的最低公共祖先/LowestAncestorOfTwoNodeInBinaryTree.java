@@ -1,49 +1,42 @@
 package t68树中两个节点的最低公共祖先;
 
-/**
- * 求树中两个节点的最低公共祖先节点。
- */
 
 import base.TreeNode;
 
 /**
- *         _______6______
+ *         _______3______
  *        /              \
- *     ___2__          ___8__
+ *     ___5__          ___1__
  *    /      \        /      \
- *    0      _4       7       9
+ *    6      _2       0       8
  *          /  \
- *          3   5
+ *          7   4
  * */
-//如上所示，3，5 的最低公共祖先是 4
-public class LowestAncestorOfTwoNodeInBinaryTree {
-    //思路：如果是二叉树，那么可以转换为查询问题
-    //单看题目可能会想，是不是要从下往上找？
-    //实际应该这么想：
-    // 1.「树」是怎么样的一棵树？二叉树？还是普通树？
-    // 2.「公共祖先」—>父节点。是否有指向父节点的指针？
-    // 3. 最低
-    //如果是二叉树的话—>利用它的性质，当前节点为 c， 给出的节点分别为 n1，n2
-    //遍历的顺序从根节点开始，接下来应该往哪些方向走呢？
-    //n1 n2 < c, 那么最低公共祖先可能在左子树，往左子树走
-    //n1 n2 > c，右子树，右子树走
-    //如果 n1< c< n2  、 n2 < c< n1，说明找到了。
 
+/**
+ * 求二叉树中两个节点的最低公共祖先节点。注意：二叉树 != 二叉搜索树。
+ * 每个节点的值都是唯一的。
+ * 如果输入的 p,q 中的一个 与 root 值相等，那么最低公共祖先为 p 或者 q。
+ */
+public class LowestAncestorOfTwoNodeInBinaryTree {
+
+    /**
+     * 思路：二叉树，不一定有序。所以不能像二叉搜索树那样通过值来判断。
+     * 递归解法。深度优先遍历。
+     * if both p and q exist in Tree rooted at root, then return their LCA
+     * if neither p and q exist in Tree rooted at root, then return null
+     * if only one of p or q (NOT both of them), exists in Tree rooted at root, return it
+     * */
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
-        //注意：
-        //每个节点的值都是唯一的。
-        //如果输入的 p,q 中的一个 与 root 值相等，那么最低公共祖先为 p 或者 q
-        while(root!=null){
-            if(p.val < root.val && q.val < root.val){
-                root = root.left;//左子树
-            }else if(p.val > root.val && q.val > root.val){
-                root = root.right;//右子树
-            }else{
-                return root;
-            }
+        if (root == null || root == p || root == q) {//递归终止条件
+            return root;
         }
-        return null;
+        TreeNode left = lowestCommonAncestor(root.left, p, q);
+        TreeNode right = lowestCommonAncestor(root.right, p, q);
+        if (left != null && right != null) {//左右子树都找到了「公共 root」，也就是左右子树包含了与 p，q 相等的节点。返回根节点
+            return root;
+        }
+        return left != null ? left : right;//如果并不是right 可能为空
     }
 
-    //如果不是二叉树。那么子节点应该有一个指向父节点的指针
 }
