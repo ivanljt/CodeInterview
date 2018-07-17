@@ -32,10 +32,8 @@ public class TailRecursive {
         return n * nonTailRecursive(n - 1);//非尾递归
     }
 
-
-
     public static void main(String[] args) {
         TailRecursive tailRecursive = new TailRecursive();
-        System.out.println(tailRecursive.factorial(50));
+        System.out.println(tailRecursive.factorial(30));
     }
 }
