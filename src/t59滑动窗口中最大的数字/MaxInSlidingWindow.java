@@ -26,6 +26,8 @@ class MaxInSlidingWindow {
      * 假设窗口大小为 size。从左到右遍历数组，
      * 判断过期的依据：queue#first < i -size + 1；
      * 判断是否添加到结果中的依据是：i >= size -1
+     * * 时间复杂度 O(N)？
+     * * 空间复杂度 O(size)
      */
 
     public ArrayList<Integer> maxInWindows(int[] num, int size) {
