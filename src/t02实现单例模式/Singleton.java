@@ -59,6 +59,11 @@ class StaticInnerClassSingleton {
         return Holder.sInstance;
     }
 
+    /**
+     * 虚拟机会保证一个类的 <clinit>() 方法在多线程环境中被正确地加锁、同步，
+     * 如果多线程同时去初始化一个类，那么只会有一个线程执行这个类的 <clinit>() 方法，
+     * 其他线程都需要阻塞地等待
+     * */
     private static class Holder {
         private static StaticInnerClassSingleton sInstance = new StaticInnerClassSingleton();
     }
