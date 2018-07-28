@@ -1,4 +1,4 @@
-package t37复杂节点的复制;
+package t35复杂链表的复制;
 
 class RandomListNode {
     int label;
