@@ -1,6 +1,5 @@
 package t八大排序;
 
-import com.sun.org.apache.bcel.internal.generic.IF_ACMPEQ;
 
 class QuickSort {
     public int[] quickSort(int[] a, int n) {
