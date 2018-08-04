@@ -19,39 +19,69 @@ package t八大排序;
  */
 public class MergeSort {
 
+    /**
+     * 递归版。
+     */
+    void mergeSort(int[] ary, int[] result, int start, int end) {
+        if (start >= end) {//递归终止条件。只剩一个元素的时候
+            return;
+        }
+        int mid = start + ((end - start) >> 1);//右移一位
+        int start1 = start, end1 = mid;
+        int start2 = mid + 1, end2 = end;
+        mergeSort(ary, result, start1, end1);
+        mergeSort(ary, result, start2, end2);
+        int k = start;//每一轮排序中，合并两个有序的数组。从它们的起始位开始
+        while (start1 <= end1 && start2 <= end2) {//升序，小的在前面
+            result[k++] = ary[start1] <= ary[start2] ? ary[start1++] : ary[start2++];
+        }
+        while (start1 <= mid) {
+            result[k++] = ary[start1++];
+        }
+        while (start2 <= end) {
+            result[k++] = ary[start2++];
+        }
+        //将结果复制回原数组。因为过程中，每一轮结束，都会将两个有序的子数组—>一个有序的子数组
+        for (int i = start; i <= end; i++) {
+            ary[i] = result[i];
+        }
+    }
 
     /**
-     * 迭代版
-     * */
-    public static void merge_sort(int[] arr) {
-        int len = arr.length;
-        int[] result = new int[len];
-        int block, start;
-
-        // 原版代码的迭代次数少了一次，没有考虑到奇数列数组的情况
-        for (block = 1; block < len; block *= 2) {
-            for (start = 0; start < len; start += 2 * block) {
-                int low = start;
-                int mid = (start + block) < len ? (start + block) : len;
-                int high = (start + 2 * block) < len ? (start + 2 * block) : len;
+     * 迭代版。「自底向上」的排序。
+     * 通过外循环，控制好每一轮归并数组的长度。
+     * 内循环中控制归并的范围
+     */
+    public int[] mergeSort(int[] array, int n) {
+        // write code here
+        if (array == null || n <= 1) {
+            return array;
+        }
+        int[] result = new int[n];
+        for (int size = 1; size < n; size *= 2) {//尺寸为1，2，4，8……
+            for (int start = 0; start < n; start += 2 * size) {
+                int end = Math.min(start + 2 * size, n);
+                int mid = Math.min(start + size, n);//换一种计算方式
                 //两个块的起始下标及结束下标
-                int start1 = low, end1 = mid;
-                int start2 = mid, end2 = high;
+                int start1 = start, end1 = mid;
+                int start2 = mid, end2 = end;//start2 = mid 而不是 mid+1；避免越界，左闭右开 [ ,)。
+                int k = start;
                 //开始对两个block进行归并排序
                 while (start1 < end1 && start2 < end2) {
-                    result[low++] = arr[start1] < arr[start2] ? arr[start1++] : arr[start2++];
+                    result[k++] = array[start1] <= array[start2] ? array[start1++] : array[start2++];
                 }
                 while (start1 < end1) {
-                    result[low++] = arr[start1++];
+                    result[k++] = array[start1++];
                 }
                 while (start2 < end2) {
-                    result[low++] = arr[start2++];
+                    result[k++] = array[start2++];
                 }
             }
-            int[] temp = arr;
-            arr = result;
-            result = temp;
+            //每一轮 外循环结束之后，将原数组和结果数组替换一下，因为下一轮的排序数组是从 array 中读取的
+            int[] tmp = array;
+            array = result;
+            result = tmp;
         }
-        result = arr;
+        return array;
     }
 }
