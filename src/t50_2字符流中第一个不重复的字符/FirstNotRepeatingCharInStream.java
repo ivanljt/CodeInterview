@@ -37,7 +37,7 @@ class FirstNotRepeatingCharInStream {
         }
         char ch = '#';//字符
         int minIndex = Integer.MAX_VALUE;
-        for (int i = 0; i < mOccurrence.length; i++) {//从头到尾遍历容器数组。
+        for (int i = 0; i < mOccurrence.length; i++) {//从头到尾遍历容器数组。找出最早出现的数字。
             if (mOccurrence[i] >= 0 && mOccurrence[i] < minIndex) {//只出现了一次
                 minIndex = mOccurrence[i];
                 ch = (char) i;//「数组下标」对应的值。也就是「出现了一次的值」
