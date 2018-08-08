@@ -38,7 +38,6 @@ class LevelPrintBinaryTree {
                 queue.offer(node.right);
             }
             if (lenToPrint == 0) {//要换行了
-                String teet;
                 lenToPrint = queue.size();
                 result.add(list);
                 list = new ArrayList<>();
