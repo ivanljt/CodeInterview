@@ -1,5 +1,7 @@
 package t判断链表环;
 
+import java.io.IOException;
+
 import base.ListNode;
 
 class EntryNodeOfLoop {
@@ -9,25 +11,52 @@ class EntryNodeOfLoop {
      * 一个一次走一步，另一个一次走两步。
      * 错误。最终相等的节点是在环内，但是不一定是起点。
      */
+    //快慢指针，环中相遇
+    //计算环的长度
+    //变为「倒数第 k 个节点的问题」
     public ListNode EntryNodeOfLoop(ListNode pHead) {
-        //快慢指针。
-        if (pHead == null) {
+        if (pHead == null || pHead.next == null) {
             return null;
         }
-        ListNode p1 = pHead;
-        ListNode p2 = pHead.next;
-        while (p1 != null && p2 != null && p1 != p2) {
-            if (p1 == p2) {
-                return p1;
+        ListNode slow = pHead;
+        ListNode fast = pHead.next;
+//        一种循环方式
+//        while (slow != fast && slow != null && fast != null && fast.next != null && fast.next.next != null) {
+//            slow = slow.next;
+//            fast = fast.next.next;
+//        }
+        while (fast != null && slow != null) {//
+            if (fast == slow) {
+                break;
             }
-            p1 = p1.next;
-            if (p2.next == null) {
-                return null;
-            } else {
-                p2 = p2.next.next;
+            fast = fast.next;
+            slow = slow.next;
+            if (fast != slow) {
+                fast = fast.next;
             }
         }
-        return p2;
+        if (fast == null) {
+            return null;
+        }
+        //计算环的大小
+        int count = 1;
+        ListNode p = slow.next;
+        while (p != slow) {
+            p = p.next;
+            count++;
+        }
+        slow = pHead;
+        fast = pHead;
+        while (count-- > 0) {//先走 count 步。
+            fast = fast.next;
+        }
+
+        //齐驱并进
+        while (fast != slow) {
+            fast = fast.next;
+            slow = slow.next;
+        }
+        return fast;
     }
 }
 
@@ -60,5 +89,36 @@ class CutNodeImpl {
             fast = fast.next;
         }
         return slow;//返回的是 slow，而不是 fast。此时 fast 应该为 null
+    }
+}
+
+/**
+ * 公式计算推导
+ * 可以省略两个步骤。
+ */
+class Solution {
+    public ListNode EntryNodeOfLoop(ListNode pHead) {
+        if (pHead == null || pHead.next == null || pHead.next.next == null) {
+            return null;
+        }
+        ListNode fast = pHead.next.next;
+        ListNode slow = pHead.next;
+        //先判断有没有环
+        while (fast != slow) {
+            if (fast.next != null && fast.next.next != null) {//如果有环，那么二者永远都不会为 null
+                fast = fast.next.next;
+                slow = slow.next;
+            } else {
+                //没有环,返回
+                return null;
+            }
+        }
+        //循环出来的话就是有环，且此时fast==slow。
+        fast = pHead;//指向链首，重头开始遍历。一次走一步。一直到 fast == slow
+        while (fast != slow) {
+            fast = fast.next;
+            slow = slow.next;
+        }
+        return slow;
     }
 }
