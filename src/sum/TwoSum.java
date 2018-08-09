@@ -1,4 +1,0 @@
-package sum;
-
-class TwoSum {
-}
