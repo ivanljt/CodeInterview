@@ -1,26 +1,23 @@
 package t判断链表环;
 
-import java.io.IOException;
-
 import base.ListNode;
 
+/**
+ * 给一个链表，若其中包含环，请找出该链表的环的入口结点，否则，输出null。
+ */
 class EntryNodeOfLoop {
-
-
     /**
-     * 一个一次走一步，另一个一次走两步。
-     * 错误。最终相等的节点是在环内，但是不一定是起点。
+     * 快慢指针，环中相遇
+     * 计算环的长度
+     * 变为「倒数第 k 个节点的问题」
      */
-    //快慢指针，环中相遇
-    //计算环的长度
-    //变为「倒数第 k 个节点的问题」
     public ListNode EntryNodeOfLoop(ListNode pHead) {
         if (pHead == null || pHead.next == null) {
             return null;
         }
         ListNode slow = pHead;
         ListNode fast = pHead.next;
-//        一种循环方式
+//        一种循环方式。如果有环的话，
 //        while (slow != fast && slow != null && fast != null && fast.next != null && fast.next.next != null) {
 //            slow = slow.next;
 //            fast = fast.next.next;
