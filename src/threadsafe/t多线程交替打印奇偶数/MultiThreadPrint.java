@@ -1,6 +1,4 @@
-package t多线程交替打印奇偶数;
-
-import java.util.concurrent.Executor;
+package threadsafe.t多线程交替打印奇偶数;
 
 /**
  * 题目:2个线程交替打印1-100内数字,其中t1线程打印奇数,t2线程打印偶数

@@ -1,11 +1,11 @@
-package producer_consumer.base;
+package threadsafe.producer_consumer.base;
 
-public abstract class AbstractProducer implements Runnable, Producer {
+public abstract class AbstractConsumer implements Runnable, Consumer {
     @Override
     public void run() {
         while (true) {
             try {
-                produce();
+                consume();
             } catch (InterruptedException e) {
                 e.printStackTrace();
                 break;

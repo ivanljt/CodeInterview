@@ -13,7 +13,6 @@ public class TailRecursive {
     /**
      * 尾递归计算阶乘
      */
-
     long factorial(long n) {
         return factorial(n, 1);
     }

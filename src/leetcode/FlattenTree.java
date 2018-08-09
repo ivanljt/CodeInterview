@@ -1,7 +1,6 @@
 package leetcode;
 
-import java.util.HashMap;
-import java.util.Map;
+import base.TreeNode;
 
 /**
  * Given a binary tree, flatten it to a linked list in-place.

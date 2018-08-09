@@ -1,4 +1,4 @@
-package producer_consumer.base;
+package threadsafe.producer_consumer.base;
 
 /**
  * 生产/消费的单位

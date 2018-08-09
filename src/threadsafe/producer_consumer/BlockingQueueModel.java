@@ -1,4 +1,4 @@
-package producer_consumer;
+package threadsafe.producer_consumer;
 
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ExecutorService;
@@ -6,10 +6,10 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import producer_consumer.base.AbstractConsumer;
-import producer_consumer.base.AbstractProducer;
-import producer_consumer.base.IProducerConsumerModel;
-import producer_consumer.base.Task;
+import threadsafe.producer_consumer.base.AbstractConsumer;
+import threadsafe.producer_consumer.base.AbstractProducer;
+import threadsafe.producer_consumer.base.IProducerConsumerModel;
+import threadsafe.producer_consumer.base.Task;
 
 /**
  * 借助 BlockingQueue 实现。

@@ -1,4 +1,4 @@
-package t如何仅用递归函数和栈操作逆序一个栈;
+package 程序员代码面试指南.t如何仅用递归函数和栈操作逆序一个栈;
 
 import java.util.Stack;
 

@@ -1,4 +1,4 @@
-package producer_consumer.base;
+package threadsafe.producer_consumer.base;
 
 interface Producer {
     void produce() throws InterruptedException;

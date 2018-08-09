@@ -1,4 +1,4 @@
-package t多线程交替打印奇偶数;
+package threadsafe.t多线程交替打印奇偶数;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
