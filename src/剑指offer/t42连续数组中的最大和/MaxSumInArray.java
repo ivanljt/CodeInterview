@@ -15,7 +15,7 @@ class MaxSumInArray {
      * 再从第二个元素开始向后累加，以此类推。
      * <p>
      * * 时间复杂度 O(N^2)
-     * * 空间复杂度 O()
+     * * 空间复杂度 O(1)
      */
     public int FindGreatestSumOfSubArrayViolenly(int[] array) {
         if (array == null || array.length == 0) {

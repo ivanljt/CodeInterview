@@ -1,6 +1,8 @@
 package t八大排序;
 
 
+import java.util.Arrays;
+
 class QuickSort {
     public int[] quickSort(int[] a, int n) {
         // write code here
@@ -46,5 +48,15 @@ class QuickSort {
 
     /**
      * 优化
-     * */
+     */
+    
+
+    public static void main(String[] args) {
+//        [54,35,48,36,27,12,44,44,8,14,26,17,28]  数组越界
+        int[] ary = DataFactory.getRandomAry(10);
+        System.out.println(Arrays.toString(ary));
+        new QuickSort().quickSort(ary, 10);
+        System.out.println(Arrays.toString(ary));
+
+    }
 }

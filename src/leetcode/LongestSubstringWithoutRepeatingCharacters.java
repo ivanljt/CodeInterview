@@ -15,26 +15,22 @@ import java.util.Map;
  * Given "pwwkew", the answer is "wke", with the length of 3. Note that the answer must be a substring, "pwke" is a subsequence and not a substring.
  */
 class LongestSubstringWithoutRepeatingCharacters {
+    /**
+     * 思路：使用 map 记录字符出现的下标，
+     * start 作为左边界，max 记录当前的「最长不重复的字符子串的长度」
+     * 左边界为上次出现位置以及 当前leftBound 中的大者。
+     **/
     public int lengthOfLongestSubstring(String s) {
-        /**
-         * 思路：使用 map 记录字符出现的下标，每一趟中计算差值 diff = right - left。左边界为上次出现位置以及 当前leftBound 中的大者。（因为重复可能是在之前出现了 ababca）
-         **/
-        if (s == null || s.length() == 0) {
-            return 0;
-        }
         Map<Character, Integer> map = new HashMap<>();
-        int len = 0;
-        int leftBound = 0;
+        int start = 0;//左边界
+        int max = 0;
         for (int i = 0; i < s.length(); i++) {
-            Character c = s.charAt(i);
-            if (map.get(c) != null) {
-                leftBound = Math.max(leftBound, map.get(c));
-            }
-            len = Math.max(len, i - leftBound + 1);
-            // TODO: 2018/7/23 奇怪，为什么 +1 就可以了
-            map.put(c, i + 1);
+            Character ch = s.charAt(i);//当前下标对应的字符
+            start = Math.max(start, map.containsKey(ch) ? map.get(ch) + 1 : 0);//前面一个重复字符对应的下标 +1
+            max = Math.max(max, i - start + 1);//计算不重复子串长度，根据情况更新
+            map.put(ch, i);//存储下标
         }
-        return len;
+        return max;
     }
 }
 
