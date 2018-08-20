@@ -110,6 +110,53 @@ class LongestIncreasingSubSequence {
         return result;
     }
 
+    /**
+     * 最优解。
+     * 利用 ends 存储一个递增序列，
+     * 仅当 当前元素（current）大于 ends 尾部元素（tail）时，才扩充右边界，
+     * 如果 current <= tail， 在有效区中用二分法找到「最左边的 >=current 的数」，并将它替换掉。
+     *
+     * 注意 ends 中的序列并不一定是 LIS，它只能确定最终的长度为 x 的递增序列 的最小末尾元素是 xxx
+     * 对有效区上的位置b ，令 c= ends[b]，则遍历到目前为止，
+     * 在所有长度为b +1的递增序列中，最小的结尾数是c。
+     *
+     * <p>
+     * 由于 ends 是有序的，所以可以用二分查找。
+     * right 为 ends 的右边界，lis 的长度等于 right+1
+     * <p>
+     * * 时间复杂度 O(NlogN)
+     * * 空间复杂度 O(N)
+     */
+    public int lengthOfLIS3(int[] nums) {
+        if (nums == null || nums.length == 0) {
+            return 0;
+        }
+//        int[] dp = new int[nums.length];//如果不需要获得具体的 lis 的话，可以不要 dp 数组
+        int[] ends = new int[nums.length]; //存储递增序列（二分查找）
+        ends[0] = nums[0];
+//        dp[0] = 1;
+        int right = 0;//右边界
+        int l, m, r = 0;
+        for (int i = 1; i < nums.length; i++) {
+            l = 0;
+            r = right;
+            int curNum = nums[i];
+            //二分查找
+            while (l <= r) {
+                m = (l + r) / 2;
+                if (curNum > ends[m]) {
+                    l = m + 1;
+                } else {
+                    r = m - 1;
+                }
+            }
+            right = Math.max(right, l);//根据情况更新右边界
+            ends[l] = curNum;
+//            dp[i] = l + 1;
+        }
+        return right + 1;
+    }
+
     public static void main(String[] args) {
         int[] ary = {10, 9, 2, 5, 3, 7, 101, 18};
         LongestIncreasingSubSequence lis = new LongestIncreasingSubSequence();
