@@ -29,6 +29,27 @@ class RemoveDuplicateNode {
         return node;
     }
 
+    /**
+     * 另一种写法
+     * */
+    public ListNode deleteDuplicates(ListNode head) {
+        if (head == null || head.next == null) {
+            return head;
+        }
+        ListNode dummyHead = head;
+        ListNode next = null;
+        while (head != null) {
+            next = head.next;
+            int val = head.val;
+            while (next != null && next.val == val) {
+                next = next.next;
+            }
+            head.next = next;
+            head = next;
+        }
+        return dummyHead;
+    }
+
     public static void main(String[] args) {
         ListNode dummyNode = new ListNode(-1);
         ListNode cur = dummyNode;

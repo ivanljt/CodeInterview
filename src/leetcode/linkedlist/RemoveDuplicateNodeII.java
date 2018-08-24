@@ -10,6 +10,11 @@ import base.ListNode;
  * 给定一个排序链表，删除所有重复的元素每个元素 都不保留。
  */
 public class RemoveDuplicateNodeII {
+
+    /**
+     * * 时间复杂度 O(N) 因为遍历链表
+     * * 空间复杂度 O(N) 因为递归
+     */
     public ListNode deleteDuplication(ListNode pHead) {//递归的解法
         //每一次递归中去掉一段重复的节点
         if (pHead == null || pHead.next == null) {//只剩下0个或者1个节点,就没有必要再判断去重了，前面的重复项（如果 有的话）都已经去掉了
@@ -26,6 +31,50 @@ public class RemoveDuplicateNodeII {
         }
         return pHead;
     }
+
+    /**
+     * 另一种写法
+     */
+    public ListNode deleteDuplicates(ListNode head) {
+        if (head == null || head.next == null) {
+            return head;
+        }
+        int val = head.val;
+        ListNode next = head.next;
+        if (next.val == val) {//下一个值跟当前值相等。需要去掉所有重复的值
+            while (head != null && head.val == val) {
+                head = head.next;
+            }
+            return deleteDuplicates(head);
+        } else {
+            head.next = deleteDuplicates(head.next);
+            return head;
+        }
+    }
+
+    /**
+     * 迭代写法
+     * */
+    public ListNode deleteDuplicates2(ListNode head) {
+        if (head == null) return null;
+        ListNode FakeHead = new ListNode(0);
+        FakeHead.next = head;
+        ListNode pre = FakeHead;
+        ListNode cur = head;
+        while (cur != null) {
+            while (cur.next != null && cur.val == cur.next.val) {
+                cur = cur.next;
+            }
+            if (pre.next == cur) {
+                pre = pre.next;//更新头结点
+            } else {
+                pre.next = cur.next;//
+            }
+            cur = cur.next;
+        }
+        return FakeHead.next;
+    }
+
 
     /**
      * 迭代解法
