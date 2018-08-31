@@ -1,4 +1,4 @@
-package 剑指offer.t38数字在排序数组中出现的次数;
+package 剑指offer.t56_01数字在排序数组中出现的次数;
 
 import java.util.Arrays;
 
