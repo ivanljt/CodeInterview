@@ -6,7 +6,46 @@ package 剑指offer.t20表示数值的字符串;
  * 但是"12e","1a3.14","1.2.3","+-5"和"12e+4.3"都不是。
  */
 class IsNumber {
+    //正负
+    //e 后面必须是 正数 或者 负整数
+    //小数点
+    //格式 (-?\d*)\.?\d+
+    //[A][.][B][C]
+    //"-1E-16" true
     public boolean isNumeric(char[] str) {
+        if (str == null || str.length == 0) {
+            return false;
+        }
+        boolean sign = false;
+        boolean hasE = false;
+        boolean hasDot = false;
+        char c;
+        for (int i = 0; i < str.length; i++) {
+            c = str[i];
+            if (c == 'e' || c == 'E') {
+                if (hasE || i == str.length - 1) {//E 出现的次数
+                    return false;
+                }
+                hasE = true;
+            } else if (c == '+' || c == '-') {//符号要么在第一位，要么在 e 后面
+                if (sign && str[i - 1] != 'e') {
+                    return false;
+                }
+
+                sign = true;
+            } else if (c == '.') {
+                if (hasDot || hasE) {// 「.」不能出现多次， 也不能出现在 E 后面
+                    return false;
+                }
+                if (i == str.length - 1) return false;//最后一位。
+                if (str[i + 1] < '0' || str[i + 1] > '9') return false;//「.」后的一位必须是数字
+                hasDot = true;
+            } else if (c > '9' || c < '0') {//非法字符
+                return false;
+            }
+            //如果是普通数字，不做操作
+        }
+        return true;
 
     }
 }
