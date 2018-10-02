@@ -8,6 +8,38 @@ import base.ListNode;
  * 两个链表的第一个公共节点。
  */
 class FindFirstCommonNode {
+
+    /**
+     * 双指针：
+     * p1 p2 分别指向 headA，headB
+     * p1到达尾部时，指向 headB；p2 到达尾部时指向 headA
+     * 如果p1 == p2，说明得到交叉节点
+     *
+     * * 时间复杂度 O(N+M)
+     * * 空间复杂度 O(1)
+     * */
+    public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+        ListNode a = headA;
+        ListNode b = headB;
+        while (a != null || b != null) {
+            if (a != null) {
+                a = a.next;
+            } else {
+                headB = headB.next;
+            }
+            if (b != null) {
+                b = b.next;
+            } else {
+                headA = headA.next;
+            }
+        }
+        while (headA != headB) {
+            headA = headA.next;
+            headB = headB.next;
+        }
+        return headA;
+    }
+
     /**
      * 计算差值，然后齐驱并进
      */
