@@ -86,7 +86,11 @@ class ProducerAndConsumer {
         }
 
         void consume() {
-            System.out.println("Consumer consume " + mQueue.poll());
+            try {
+                System.out.println("Consumer consume " + mQueue.take());
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -101,7 +105,11 @@ class ProducerAndConsumer {
 
         void produce() {
             System.out.println("producer produce");
-            mQueue.add(mRandom.nextInt(100));
+            try {
+                mQueue.put(mRandom.nextInt(100));
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
 
     }
