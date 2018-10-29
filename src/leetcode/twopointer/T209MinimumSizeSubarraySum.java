@@ -12,13 +12,40 @@ package leetcode.twopointer;
  * If you have figured out the O(n) solution, try coding another solution of which the time complexity is O(n log n).
  */
 class T209MinimumSizeSubarraySum {
-
+    /**
+     * 思路，双指针。外循环为 j，每一轮中都增加 nums[j]，一直到  从 i 到 j 的数字大于 s，只要满足条件，就更新 min 并且令 i 后移。
+     * 1 2 3 4 5
+     * i   j
+     * <p>
+     * * 时间复杂度 O(N*lgN)
+     * * 空间复杂度 O(1)
+     */
+    public int minSubArrayLen(int s, int[] nums) {
+        if (nums == null || nums.length <= 0) {
+            return 0;
+        }
+        int minLen = Integer.MAX_VALUE;
+        int i = 0;
+        int j = 0;
+        int sum = 0;
+        while (j < nums.length) {
+//            while(sum< s){//一直到符合条件为止
+            sum += nums[j];
+            j++;
+            //          }
+            while (sum >= s) {
+                minLen = Math.min(minLen, j - i);
+                sum -= nums[i++];
+            }
+        }
+        return minLen == Integer.MAX_VALUE ? 0 : minLen;
+    }
 
     static class SolRecord {
         /**
          * 读错题意了。题目中是>= 而不是 =
          * 不足：这种解法没有复用先前的结果，可以利用滑动窗口的思想
-         *
+         * <p>
          * * 时间复杂度 O(N^2)
          * * 空间复杂度 O(1)
          */
