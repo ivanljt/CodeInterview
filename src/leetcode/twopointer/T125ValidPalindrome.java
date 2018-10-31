@@ -21,6 +21,8 @@ class T125ValidPalindrome {
     class SolutionRecord {
         /**
          * 思路，比较首尾两个「合法」的字符，是否相等。
+         * * 时间复杂度 O(N)
+         * * 空间复杂度 O(1)
          */
         public boolean isPalindrome(String s) {
             if (s == null || s.length() == 0) {
@@ -52,5 +54,34 @@ class T125ValidPalindrome {
         }
     }
 
-
+    /**
+     * 「优雅一点的解法」。在一个循环里面的处理多件事情。
+     * * 时间复杂度 O(N)
+     * * 空间复杂度 O(1)
+     * */
+    public boolean isPalindrome(String s) {
+        if(s == null || s.length()== 0){
+            return true;
+        }
+        int i = 0;
+        int j = s.length()-1;
+        char cHead;
+        char cTail;
+        while(i < j){
+            cHead = s.charAt(i);
+            cTail = s.charAt(j);
+            if(!Character.isLetterOrDigit(cHead)){
+                i++;
+            }else if(!Character.isLetterOrDigit(cTail)){
+                j--;
+            }else{//满足条件了才进行转换
+                if(Character.toUpperCase(cHead) != Character.toUpperCase(cTail)){
+                    return false;
+                }
+                i++;
+                j--;
+            }
+        }
+        return true;
+    }
 }
